@@ -8,10 +8,12 @@
     "android": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug"
   },
   "dependencies": {
+    "formik": "^1.3.0",
     "react": "16.5.0",
     "react-native": "0.56",
     "react-native-navigation": "^2.0.2555",
-    "react-native-vector-icons": "^4.4.2"
+    "react-native-vector-icons": "^4.4.2",
+    "yup": "^0.26.6"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",

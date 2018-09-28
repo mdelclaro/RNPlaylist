@@ -5,9 +5,6 @@ import { getImageSource } from 'react-native-vector-icons/Ionicons';
 
 import Form from '../components/Form';
 
-import Input from '../components/UI/Input';
-import ButtonWithBackground from '../components/UI/ButtonWithBackground';
-
 class Home extends Component {
 	static get options() {
 		return {
