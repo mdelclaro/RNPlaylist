@@ -1,0 +1,17 @@
+{
+  "extends": "rallycoding",
+  "rules": {
+    "react/require-extension": "off",
+    "global-require": 0,
+    "arrow-body-style": 0,
+    "no-underscore-dangle": 0,
+    "prefer-template": 0,
+    "no-restricted-syntax": 0
+  },
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "__DEV__": true
+  }
+}
