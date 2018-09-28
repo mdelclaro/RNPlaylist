@@ -31,14 +31,6 @@ class Home extends Component {
               }
             ]
           },
-          bottomTabs: {
-            backgroundColor: '#32b54a'
-          },
-          bottomTab: {
-            selectedIconColor: 'white',
-            textColor: 'white',
-            selectedTextColor: 'white'
-          }
         });
       });
 	}

@@ -10,7 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
-class Menu extends Component {
+class SideMenu extends Component {
   render() {
     return (
       <View
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Menu;
+export default SideMenu;

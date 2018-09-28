@@ -1,13 +1,101 @@
+import { Platform } from 'react-native';
 import { Navigation } from 'react-native-navigation';
+import { getImageSource } from 'react-native-vector-icons/Ionicons';
 
-import Home from './screens/Home';
-import Biblioteca from './screens/Biblioteca';
-import SideMenu from './screens/SideMenu';
+import registerScreens from './RegisterScreens';
 
-const registerScreens = () => {
-  Navigation.registerComponent('pdm.Home', () => Home);  
-  Navigation.registerComponent('pdm.Biblioteca', () => Biblioteca);
-  Navigation.registerComponent('pdm.SideMenu', () => SideMenu);
+registerScreens();
+
+const start = () => {
+  Navigation.setDefaultOptions({
+    bottomTabs: {
+      backgroundColor: '#32b54a'
+    },
+    bottomTab: {
+      selectedIconColor: 'white',
+      textColor: 'white',
+      selectedTextColor: 'white'
+    }
+  });
+
+  Promise.all([
+    getImageSource(Platform.OS === 'android' ? 'md-home' : 'ios-home', 35, 'white'),
+    getImageSource(Platform.OS === 'android' ? 'md-filing' : 'ios-paper-filing', 35, 'white')
+  ]).then(icons => {
+    Navigation.setRoot({
+      root: {
+        sideMenu: {
+          right: {
+            component: {
+              id: 'rightDrawer',
+              name: 'pdm.SideMenu',
+            },
+          },
+          center: {
+            bottomTabs: {
+              id: 'bottomTabs',
+              options: {
+                topbar: {
+                  visible: true,
+                  id: 'topBar',
+                  title: {
+                    text: 'Playlist'
+                  }
+                }
+              },
+              children: [
+                {
+                  stack: {
+                    id: 'tab1',
+                    children: [
+                      {
+                        component: {
+                          id: 'Home',
+                          name: 'pdm.Home',
+                          options: {
+                            topbar: {
+                              visible: true
+                            },
+                            bottomTab: {
+                              text: 'Home',
+                              textColor: 'white',
+                              selectedTextColor: 'white',
+                              icon: icons[0],
+                            }
+                          }
+                        },
+                      },
+                    ]
+                  }
+                },
+                {
+                  stack: {
+                    id: 'tab2',
+                    children: [
+                      {
+                        component: {
+                          id: 'Biblioteca',
+                          name: 'pdm.Biblioteca',
+                          options: {
+                            bottomTab: {
+                              text: 'Biblioteca',
+                              textColor: 'white',
+                              icon: icons[1],
+                              iconColor: 'white',
+                            }
+                          }
+                        },
+                      },
+                    ]
+                  }
+                },
+              ],
+            },
+          }
+        }
+      }
+    });
+  });
 };
 
-export default registerScreens;
+export default start;
