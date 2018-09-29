@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { View, Platform } from 'react-native';
+import { View, Platform, StyleSheet, Keyboard } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { getImageSource } from 'react-native-vector-icons/Ionicons';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import Form from '../components/Form';
 
 class Home extends Component {
-	static get options() {
-		return {
-			topBar: {
-				visible: true,
-				title: {
-					text: 'Playlist'
-				}
-			}
-		};
-	}
+  static get options() {
+    return {
+      topBar: {
+        visible: true,
+        title: {
+          text: 'Playlist'
+        }
+      }
+    };
+  }
 
-	constructor(props) {
+  constructor(props) {
     super(props);
     Navigation.events().bindComponent(this);
     getImageSource(Platform.OS === 'android' ? 'md-more' : 'ios-more', 30, '#425cf4')
@@ -33,9 +34,32 @@ class Home extends Component {
           },
         });
       });
-	}
-	
-	navigationButtonPressed({ buttonId }) {
+  }
+
+  componentDidMount() {
+    Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+    Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+  }
+
+  keyboardDidShow = () => {
+    Navigation.mergeOptions(this.props.componentId, {
+      bottomTabs: {
+        visible: false,
+        animate: false
+      }
+    });
+  }
+
+  keyboardDidHide = () => {
+    Navigation.mergeOptions(this.props.componentId, {
+      bottomTabs: {
+        visible: true,
+        animate: false
+      }
+    });
+  }
+
+  navigationButtonPressed({ buttonId }) {
     if (buttonId === 'menuButton') {
       Navigation.mergeOptions('Home', {
         sideMenu: {
@@ -47,13 +71,21 @@ class Home extends Component {
     }
   }
 
-	render() {
-		return (
-			<View>
-				<Form />
-			</View>
-		);
-	}
+  render() {
+    return (
+      <KeyboardAwareScrollView enableOnAndroid enableResetScrollToCoords={false} style={styles.container}>
+        <View style={styles.container}>
+          <Form />
+        </View>
+      </KeyboardAwareScrollView>
+    );
+  }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  }
+});
 
 export default Home;

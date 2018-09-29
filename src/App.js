@@ -20,7 +20,7 @@ const start = () => {
 
   Promise.all([
     getImageSource(Platform.OS === 'android' ? 'md-home' : 'ios-home', 35, 'white'),
-    getImageSource(Platform.OS === 'android' ? 'md-filing' : 'ios-paper-filing', 35, 'white')
+    getImageSource(Platform.OS === 'android' ? 'md-filing' : 'ios-filing', 35, 'white')
   ]).then(icons => {
     Navigation.setRoot({
       root: {
