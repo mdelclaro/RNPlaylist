@@ -12,7 +12,8 @@ class Home extends Component {
       topBar: {
         visible: true,
         title: {
-          text: 'Playlist'
+          text: 'Playlist',
+          fontSize: 20
         }
       }
     };
@@ -21,7 +22,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     Navigation.events().bindComponent(this);
-    getImageSource(Platform.OS === 'android' ? 'md-more' : 'ios-more', 30, '#425cf4')
+    getImageSource(Platform.OS === 'android' ? 'md-more' : 'ios-more', 30, '#2f8c35')
       .then(icon => {
         Navigation.mergeOptions('Home', {
           topBar: {

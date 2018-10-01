@@ -9,13 +9,13 @@ registerScreens();
 const start = () => {
   Navigation.setDefaultOptions({
     bottomTabs: {
-      backgroundColor: '#32b54a',
+      backgroundColor: 'black',
       drawBehind: true
     },
     bottomTab: {
-      selectedIconColor: 'white',
-      textColor: 'white',
-      selectedTextColor: 'white'
+      selectedIconColor: '#2f8c35',
+      textColor: '#2f8c35',
+      selectedTextColor: '#2f8c35'
     }
   });
 

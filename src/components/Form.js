@@ -106,7 +106,7 @@ class LoginForm extends Component {
 									/>
 								</View>
 								<ButtonWithBackground
-									color='#29aaf4'
+									color='#2f8c35'
 									onPress={handleSubmit}
 									isDisabled={!isValid}
 								>

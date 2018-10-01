@@ -24,10 +24,10 @@ class SideMenu extends Component {
             <Icon
               name={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
               size={30}
-              color='#aaa'
+              color='#2f8c35'
               style={styles.drawerItemIcon}
             />
-            <Text>Cadastrar</Text>
+            <Text style={styles.drawerItemText}>Cadastrar</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.onLogout}>
@@ -35,10 +35,10 @@ class SideMenu extends Component {
             <Icon
               name={Platform.OS === 'android' ? 'md-search' : 'ios-search'}
               size={30}
-              color='#aaa'
+              color='#2f8c35'
               style={styles.drawerItemIcon}
             />
-            <Text>Consultar</Text>
+            <Text style={styles.drawerItemText}>Consultar</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.onLogout}>
@@ -46,10 +46,10 @@ class SideMenu extends Component {
             <Icon
               name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
               size={30}
-              color='#aaa'
+              color='#2f8c35'
               style={styles.drawerItemIcon}
             />
-            <Text>Alterar</Text>
+            <Text style={styles.drawerItemText}>Alterar</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.onLogout}>
@@ -57,10 +57,10 @@ class SideMenu extends Component {
             <Icon
               name={Platform.OS === 'android' ? 'md-filing' : 'ios-filing'}
               size={30}
-              color='#aaa'
+              color='#2f8c35'
               style={styles.drawerItemIcon}
             />
-            <Text>Listar</Text>
+            <Text style={styles.drawerItemText}>Listar</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.onLogout}>
@@ -68,7 +68,6 @@ class SideMenu extends Component {
             <Icon
               name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'}
               size={30}
-              color='#aaa'
               style={[styles.drawerItemIcon, { color: '#fc6f6f' }]}
             />
             <Text style={{ color: '#fc6f6f' }}>Excluir</Text>
@@ -82,22 +81,25 @@ class SideMenu extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     flex: 1
   },
   drawerItemFirst: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
   },
   drawerItem: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     borderTopWidth: 1,
     borderTopColor: '#e8e8e8'
+  },
+  drawerItemText: {
+    color: 'white'
   },
   drawerItemIcon: {
     marginRight: 10
