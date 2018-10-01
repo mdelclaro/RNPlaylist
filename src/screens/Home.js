@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { View, Platform, StyleSheet, Keyboard } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { getImageSource } from 'react-native-vector-icons/Ionicons';
+import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import Form from '../components/Form';
+
+import { trackAdded, trackChanged, trackDeleted } from '../store/actions/index';
 
 class Home extends Component {
   static get options() {
@@ -72,6 +75,18 @@ class Home extends Component {
     }
   }
 
+  submitHandler = (values, { resetForm }) => {
+    Keyboard.dismiss();
+    this.props.onTrackAdd(
+      values.title,
+      values.artist,
+      values.album,
+      values.genre
+    );
+    resetForm({});
+    alert(JSON.stringify(this.props.tracks));
+  }
+
   render() {
     return (
       <KeyboardAwareScrollView
@@ -79,7 +94,9 @@ class Home extends Component {
         style={styles.container}
       >
         <View style={styles.container}>
-          <Form />
+          <Form 
+            submitHandler={this.submitHandler}
+          />
         </View>
       </KeyboardAwareScrollView>
     );
@@ -92,4 +109,21 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    tracks: state.tracks.tracks
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onTrackAdd: (title, artist, album, genre) =>
+      dispatch(trackAdded(title, artist, album, genre)),
+    onTrackChange: (title, artist, album, genre) =>
+      dispatch(trackChanged(title, artist, album, genre)),
+    onTrackDelete: title =>
+      dispatch(trackDeleted(title))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
