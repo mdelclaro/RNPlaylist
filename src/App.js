@@ -9,7 +9,8 @@ registerScreens();
 const start = () => {
   Navigation.setDefaultOptions({
     bottomTabs: {
-      backgroundColor: '#32b54a'
+      backgroundColor: '#32b54a',
+      drawBehind: true
     },
     bottomTab: {
       selectedIconColor: 'white',
@@ -19,7 +20,7 @@ const start = () => {
   });
 
   Promise.all([
-    getImageSource(Platform.OS === 'android' ? 'md-pin' : 'ios-pin', 35, 'white'),
+    getImageSource(Platform.OS === 'android' ? 'md-home' : 'ios-home', 35, 'white'),
     getImageSource(Platform.OS === 'android' ? 'md-filing' : 'ios-filing', 35, 'white')
   ]).then(sources => {
     Navigation.setRoot({
