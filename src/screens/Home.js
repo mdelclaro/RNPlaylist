@@ -73,7 +73,10 @@ class Home extends Component {
 
   render() {
     return (
-      <KeyboardAwareScrollView enableOnAndroid enableResetScrollToCoords={false} style={styles.container}>
+      <KeyboardAwareScrollView
+        enableOnAndroid enableResetScrollToCoords={false}
+        style={styles.container}
+      >
         <View style={styles.container}>
           <Form />
         </View>

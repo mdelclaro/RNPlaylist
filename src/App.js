@@ -19,9 +19,9 @@ const start = () => {
   });
 
   Promise.all([
-    getImageSource(Platform.OS === 'android' ? 'md-home' : 'ios-home', 35, 'white'),
+    getImageSource(Platform.OS === 'android' ? 'md-pin' : 'ios-pin', 35, 'white'),
     getImageSource(Platform.OS === 'android' ? 'md-filing' : 'ios-filing', 35, 'white')
-  ]).then(icons => {
+  ]).then(sources => {
     Navigation.setRoot({
       root: {
         sideMenu: {
@@ -60,7 +60,7 @@ const start = () => {
                               text: 'Home',
                               textColor: 'white',
                               selectedTextColor: 'white',
-                              icon: icons[0],
+                              icon: sources[0],
                             }
                           }
                         },
@@ -80,7 +80,7 @@ const start = () => {
                             bottomTab: {
                               text: 'Biblioteca',
                               textColor: 'white',
-                              icon: icons[1],
+                              icon: sources[1],
                               iconColor: 'white',
                             }
                           }

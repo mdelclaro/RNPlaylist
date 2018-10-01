@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
-  Image
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -22,15 +21,17 @@ class SideMenu extends Component {
       >
         <TouchableOpacity onPress={this.props.onLogout}>
           <View style={styles.drawerItemFirst}>
-            <Image
-              source={require('../assets/md-create.svg')}
+            <Icon
+              name={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
+              size={30}
+              color='#aaa'
               style={styles.drawerItemIcon}
             />
             <Text>Cadastrar</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.onLogout}>
-          <View style={styles.drawerItemFirst}>
+          <View style={styles.drawerItem}>
             <Icon
               name={Platform.OS === 'android' ? 'md-search' : 'ios-search'}
               size={30}
@@ -52,7 +53,7 @@ class SideMenu extends Component {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.onLogout}>
-          <View style={styles.drawerItemFirst}>
+          <View style={styles.drawerItem}>
             <Icon
               name={Platform.OS === 'android' ? 'md-filing' : 'ios-filing'}
               size={30}
@@ -99,9 +100,6 @@ const styles = StyleSheet.create({
     borderTopColor: '#e8e8e8'
   },
   drawerItemIcon: {
-    width: 30,
-    height: 30,
-    //tintColor: '#aaa',
     marginRight: 10
   }
 });
