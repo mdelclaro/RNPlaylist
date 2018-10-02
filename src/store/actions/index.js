@@ -1,5 +1,7 @@
 export { 
   trackAdded,
   trackChanged,
-  trackDeleted
+  trackDeleted,
 } from './TrackAction';
+
+export { optionChanged } from './OptionAction';

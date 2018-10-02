@@ -1,4 +1,4 @@
-import { 
+import {
   TRACK_ADDED,
   TRACK_CHANGED,
   TRACK_DELETED
@@ -13,18 +13,31 @@ export default (state = INITIAL_STATE, action) => {
     case TRACK_ADDED:
       return {
         ...state,
-        tracks: [...state.tracks, action.payload.track]
+        tracks: [...state.tracks, action.payload]
       };
-    case TRACK_CHANGED:
+    case TRACK_CHANGED: {
+      const { artist, album, genre } = action.payload;
+      
       return {
         ...state,
-        tracks: action.payload.track
+        tracks: state.tracks.map(track => {
+          if (track.title === action.payload.title) {
+            return {
+              ...track,
+              artist,
+              album,
+              genre
+            };
+          }
+          return track;
+        })
       };
+    }
     case TRACK_DELETED:
       return {
         ...state,
         tracks: state.tracks.filter(track => {
-          return track.title !== action.payload;
+          return track.title !== action.payload.title;
         })
       };
     default:

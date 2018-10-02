@@ -29,10 +29,10 @@ class LoginForm extends Component {
 		//}
 		return (
 			<Formik
-				initialValues={{ track: '', artist: '', album: '', genre: '' }}
+				initialValues={{ title: '', artist: '', album: '', genre: '' }}
 				onSubmit={this.props.submitHandler}
 				validationSchema={Yup.object().shape({
-					track: Yup.string()
+					title: Yup.string()
 						.required('Insira o nome da música'),
 					artist: Yup.string()
 						.required('Insira o nome do artista'),
@@ -64,11 +64,11 @@ class LoginForm extends Component {
 										placeholder='Título da Música'
 										autoCapitalize='words'
 										autoCorrect={false}
-										value={values.track}
+										value={values.title}
 										onChange={setFieldValue}
 										onTouch={setFieldTouched}
-										name='track'
-										error={touched.track && errors.track}
+										name='title'
+										error={touched.title && errors.title}
 										style={styles.input}
 									/>
 									<InputValidation

@@ -40,6 +40,10 @@ class Home extends Component {
       });
   }
 
+  state = {
+    option: 'add'
+  }
+
   componentDidMount() {
     Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
     Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
@@ -76,15 +80,35 @@ class Home extends Component {
   }
 
   submitHandler = (values, { resetForm }) => {
+    switch (this.props.option) {
+      case 'add':
+        this.props.onTrackAdd(
+          values.title,
+          values.artist,
+          values.album,
+          values.genre
+        );
+        break;
+      case 'search':
+        break;
+      case 'change':
+        this.props.onTrackChange(
+          values.title,
+          values.artist,
+          values.album,
+          values.genre
+        );
+        break;
+      case 'list':
+        break;
+      case 'delete':
+        break;
+      default:
+        break;
+    }
     Keyboard.dismiss();
-    this.props.onTrackAdd(
-      values.title,
-      values.artist,
-      values.album,
-      values.genre
-    );
     resetForm({});
-    alert(JSON.stringify(this.props.tracks));
+    // alert(JSON.stringify(this.props.tracks));
   }
 
   render() {
@@ -94,7 +118,7 @@ class Home extends Component {
         style={styles.container}
       >
         <View style={styles.container}>
-          <Form 
+          <Form
             submitHandler={this.submitHandler}
           />
         </View>
@@ -111,7 +135,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    tracks: state.tracks.tracks
+    tracks: state.tracks.tracks,
+    option: state.options.option
   };
 };
 
