@@ -6,7 +6,7 @@ import {
 	Keyboard,
 	TouchableWithoutFeedback
 } from 'react-native';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -21,11 +21,11 @@ class LoginForm extends Component {
 		let headingText = null;
 
 		//if (true) {
-			headingText = (
-				<MainText>
-					<HeadingText>Home</HeadingText>
-				</MainText>
-			);
+		headingText = (
+			<MainText>
+				<HeadingText>Home</HeadingText>
+			</MainText>
+		);
 		//}
 		return (
 			<Formik
@@ -34,12 +34,24 @@ class LoginForm extends Component {
 				validationSchema={Yup.object().shape({
 					title: Yup.string()
 						.required('Insira o nome da música'),
-					artist: Yup.string()
-						.required('Insira o nome do artista'),
-					album: Yup.string()
-						.required('Insira o nome do álbum'),
-					genre: Yup.string()
-						.required('Insira o genêro')
+					artist: this.props.option !== 'search'
+						? Yup.string()
+							.required('Insira o nome do artista')
+						: Yup.lazy(() => {
+							return Yup.mixed().notRequired();
+						}),
+					album: this.props.option !== 'search'
+						? Yup.string()
+							.required('Insira o nome do álbum')
+						: Yup.lazy(() => {
+							return Yup.mixed().notRequired();
+						}),
+					genre: this.props.option !== 'search'
+						? Yup.string()
+							.required('Insira o gênero')
+						: Yup.lazy(() => {
+							return Yup.mixed().notRequired();
+						}),
 				})}
 				render={({
 					values,
@@ -149,11 +161,10 @@ const styles = StyleSheet.create({
 	}
 });
 
-// const mapStateToProps = state => {
-//   return {
-//     isLoading: state.ui.isLoading
-//   };
-// };
+const mapStateToProps = state => {
+	return {
+		option: state.options.option
+	};
+};
 
-//export default connect(mapStateToProps)(LoginForm);
-export default LoginForm;
+export default connect(mapStateToProps)(LoginForm);

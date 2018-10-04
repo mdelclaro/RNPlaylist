@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 
 import TrackReducer from './reducers/TrackReducer';
 import OptionReducer from './reducers/OptionReducer';
+import SelectionReducer from './reducers/SelectionReducer';
 
 const rootReducer = combineReducers({
     tracks: TrackReducer,
-    options: OptionReducer
+    options: OptionReducer,
+    selectedTrack: SelectionReducer
 });
 
 let composeEnhancers = compose;

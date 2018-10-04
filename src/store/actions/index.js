@@ -5,3 +5,5 @@ export {
 } from './TrackAction';
 
 export { optionChanged } from './OptionAction';
+
+export { selectTrack } from './SelectTrackAction';

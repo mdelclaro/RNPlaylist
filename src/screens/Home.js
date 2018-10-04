@@ -77,6 +77,7 @@ class Home extends Component {
         }
       });
     }
+    Keyboard.dismiss();
   }
 
   submitHandler = (values, { resetForm }) => {
@@ -89,8 +90,16 @@ class Home extends Component {
           values.genre
         );
         break;
-      case 'search':
+      case 'search': {
+        const searchedTrack = this.props.tracks.map(track => {
+          if (track.title === values.title) {
+            return track;
+          }
+          return null;
+        });
+        alert(JSON.stringify(searchedTrack));
         break;
+      }
       case 'change':
         this.props.onTrackChange(
           values.title,
@@ -102,6 +111,7 @@ class Home extends Component {
       case 'list':
         break;
       case 'delete':
+        this.props.onTrackDelete(values.title);
         break;
       default:
         break;
