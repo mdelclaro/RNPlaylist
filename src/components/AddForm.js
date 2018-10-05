@@ -16,7 +16,7 @@ import InputValidation from './UI/InputValidation';
 import HeadingText from './UI/HeadingText';
 import MainText from './UI/MainText';
 
-class LoginForm extends Component {
+class AddForm extends Component {
 	render() {
 		let headingText = null;
 
@@ -167,4 +167,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps)(LoginForm);
+export default connect(mapStateToProps)(AddForm);

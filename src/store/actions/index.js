@@ -4,6 +4,6 @@ export {
   trackDeleted,
 } from './TrackAction';
 
-export { optionChanged } from './OptionAction';
+export { optionChanged, trackPositionChanged } from './ControlAction';
 
 export { selectTrack } from './SelectTrackAction';

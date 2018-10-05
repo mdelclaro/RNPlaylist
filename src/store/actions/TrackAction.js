@@ -4,27 +4,27 @@ import {
   TRACK_DELETED
 } from './types';
 
-export const trackAdded = (title, artist, album, genre) => {
+export const trackAdded = (id, title, artist, album, genre) => {
   return {
     type: TRACK_ADDED,
     payload: {
-        title, artist, album, genre
+        id, title, artist, album, genre
     }
   };
 };
 
-export const trackChanged = (title, artist, album, genre) => {
+export const trackChanged = (id, title, artist, album, genre) => {
   return {
     type: TRACK_CHANGED,
     payload: {
-        title, artist, album, genre
+        id, title, artist, album, genre
     }
   };
 };
 
-export const trackDeleted = title => {
+export const trackDeleted = id => {
   return {
     type: TRACK_DELETED,
-    payload: title
+    payload: id
   };
 };

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
-import TrackDetail from '../components/TrackDetail';
+import Track from '../components/Track';
 
 class Biblioteca extends Component {
   static get options() {
@@ -19,7 +19,7 @@ class Biblioteca extends Component {
 
   renderItem(track) {
     return (
-      <TrackDetail track={track.item} />
+      <Track track={track.item} />
     );
   }
 
@@ -29,7 +29,7 @@ class Biblioteca extends Component {
         <FlatList
           data={this.props.tracks}
           renderItem={this.renderItem}
-          keyExtractor={(track) => track.title}
+          keyExtractor={(track) => track.id}
         />
       </View>
     );

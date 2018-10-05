@@ -16,14 +16,15 @@ export default (state = INITIAL_STATE, action) => {
         tracks: [...state.tracks, action.payload]
       };
     case TRACK_CHANGED: {
-      const { artist, album, genre } = action.payload;
+      const { id, title, artist, album, genre } = action.payload;
       
       return {
         ...state,
         tracks: state.tracks.map(track => {
-          if (track.title === action.payload.title) {
+          if (track.id === id) {
             return {
               ...track,
+              title,
               artist,
               album,
               genre
@@ -37,7 +38,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         tracks: state.tracks.filter(track => {
-          return track.title !== action.payload.title;
+          return track.id !== action.payload.id;
         })
       };
     default:

@@ -5,9 +5,16 @@ import { getImageSource } from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import Form from '../components/Form';
+import AddForm from '../components/AddForm';
 
-import { trackAdded, trackChanged, trackDeleted } from '../store/actions/index';
+import {
+  trackAdded,
+  trackChanged,
+  trackDeleted,
+  trackPositionChanged
+} from '../store/actions/index';
+
+const uuidV1 = require('uuid/v1');
 
 class Home extends Component {
   static get options() {
@@ -82,14 +89,17 @@ class Home extends Component {
 
   submitHandler = (values, { resetForm }) => {
     switch (this.props.option) {
-      case 'add':
+      case 'add': {
+        const id = uuidV1();
         this.props.onTrackAdd(
+          id,
           values.title,
           values.artist,
           values.album,
           values.genre
         );
         break;
+      }
       case 'search': {
         const searchedTrack = this.props.tracks.map(track => {
           if (track.title === values.title) {
@@ -108,8 +118,13 @@ class Home extends Component {
           values.genre
         );
         break;
-      case 'list':
-        break;
+      // case 'list':
+      //   Navigation.mergeOptions('bottomTabs', {
+      //     bottomTabs: {
+      //       currentTabIndex: 'Biblioteca'
+      //     }
+      //   });
+      //   break;
       case 'delete':
         this.props.onTrackDelete(values.title);
         break;
@@ -128,7 +143,7 @@ class Home extends Component {
         style={styles.container}
       >
         <View style={styles.container}>
-          <Form
+          <AddForm
             submitHandler={this.submitHandler}
           />
         </View>
@@ -152,12 +167,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTrackAdd: (title, artist, album, genre) =>
-      dispatch(trackAdded(title, artist, album, genre)),
-    onTrackChange: (title, artist, album, genre) =>
-      dispatch(trackChanged(title, artist, album, genre)),
-    onTrackDelete: title =>
-      dispatch(trackDeleted(title))
+    onTrackAdd: (id, title, artist, album, genre) =>
+      dispatch(trackAdded(id, title, artist, album, genre)),
+    onTrackChange: (id, title, artist, album, genre) =>
+      dispatch(trackChanged(id, title, artist, album, genre)),
+    onTrackDelete: id =>
+      dispatch(trackDeleted(id)),
+    onPositionChange: position =>
+      dispatch(trackPositionChanged(position))
   };
 };
 

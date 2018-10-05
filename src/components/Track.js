@@ -3,50 +3,45 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableWithoutFeedback,
-  LayoutAnimation
+  TouchableWithoutFeedback
+  // LayoutAnimation
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { selectTrack } from '../store/actions/index';
+import { selectTrack } from '../store/actions';
 
 import CardSection from './UI/CardSection';
+import TrackDetails from './TrackDetails';
 
 class TrackDetail extends Component {
   onTrackSelected = () => {
     this.props.onTrackSelected(this.props.track.title);
   }
 
-  renderDetails() {
-    const { title, artist, album, genre } = this.props.track;
-    if (title === this.props.selectedTrack) {
-      return (
-        <CardSection style={{ flexDirection: 'column', }}>
-          <Text style={{ flex: 1 }}>
-            {`Artista: ${artist}`}
-          </Text>
-          <Text style={{ flex: 1 }}>
-            {`Album: ${album}`}
-          </Text>
-          <Text style={{ flex: 1 }}>
-            {`Genero: ${genre}`}
-          </Text>
-        </CardSection>
-      );
-    }
+  editTrack = () => {
+
   }
 
   render() {
-    console.log(JSON.stringify(this.props.track));
+    const { title, artist, album, genre } = this.props.track;
     return (
       <TouchableWithoutFeedback onPress={this.onTrackSelected}>
         <View>
           <CardSection>
             <Text style={styles.titleStyle}>
-              {this.props.track.title}
+              {title}
             </Text>
           </CardSection>
-          {this.renderDetails()}
+          {
+            title === this.props.selectedTrack
+              ? <TrackDetails
+                artist={artist}
+                album={album}
+                genre={genre}
+              />
+              : null
+          }
+
         </View>
       </TouchableWithoutFeedback>
     );
