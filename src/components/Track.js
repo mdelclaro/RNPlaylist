@@ -15,15 +15,15 @@ import TrackDetails from './TrackDetails';
 
 class TrackDetail extends Component {
   onTrackSelected = () => {
-    this.props.onTrackSelected(this.props.track.title);
+    this.props.onTrackSelected(this.props.track.id);
   }
 
   editTrack = () => {
-
+    alert('caraio');
   }
 
   render() {
-    const { title, artist, album, genre } = this.props.track;
+    const { id, title, artist, album, genre } = this.props.track;
     return (
       <TouchableWithoutFeedback onPress={this.onTrackSelected}>
         <View>
@@ -33,11 +33,13 @@ class TrackDetail extends Component {
             </Text>
           </CardSection>
           {
-            title === this.props.selectedTrack
+            id === this.props.selectedTrack
               ? <TrackDetails
+                id={id}
                 artist={artist}
                 album={album}
                 genre={genre}
+                editTrack={this.editTrack}
               />
               : null
           }

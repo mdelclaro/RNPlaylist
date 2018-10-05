@@ -25,12 +25,11 @@ const TrackDetails = props => {
           </Text>
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <TouchableOpacity onPress={this.editTrack}>
+          <TouchableOpacity onPress={props.editTrack}>
             <Icon
               name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
               size={25}
               color='#2f8c35'
-              //style={styles.drawerItemIcon}
             />
           </TouchableOpacity>
         </View>

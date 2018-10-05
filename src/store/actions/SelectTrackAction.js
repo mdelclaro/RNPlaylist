@@ -1,8 +1,8 @@
 import { SELECT_TRACK } from './types'; 
 
-export const selectTrack = trackTitle => (
+export const selectTrack = id => (
   {  
     type: SELECT_TRACK,
-    payload: trackTitle
+    payload: id
   }
 );
