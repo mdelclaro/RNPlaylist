@@ -12,14 +12,27 @@ import { selectTrack } from '../store/actions';
 
 import CardSection from './UI/CardSection';
 import TrackDetails from './TrackDetails';
+import EditModal from './EditModal';
 
 class TrackDetail extends Component {
+  state = {
+    isModalVisible: false
+  }
+
   onTrackSelected = () => {
     this.props.onTrackSelected(this.props.track.id);
   }
 
-  editTrack = () => {
-    alert('caraio');
+  showEditModal = () => {
+    this.setState({
+      isModalVisible: true
+    });
+  }
+
+  editTrackHandler = () => {
+    this.setState({
+      isModalVisible: false
+    });
   }
 
   render() {
@@ -39,11 +52,16 @@ class TrackDetail extends Component {
                 artist={artist}
                 album={album}
                 genre={genre}
-                editTrack={this.editTrack}
+                editTrack={this.showEditModal}
               />
               : null
           }
-
+          {
+            <EditModal 
+            isVisible={this.state.isModalVisible} 
+            editTrackHandler={this.editTrackHandler}
+            />
+          }
         </View>
       </TouchableWithoutFeedback>
     );
