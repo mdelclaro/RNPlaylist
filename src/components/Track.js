@@ -57,9 +57,14 @@ class TrackDetail extends Component {
               : null
           }
           {
-            <EditModal 
-            isVisible={this.state.isModalVisible} 
-            editTrackHandler={this.editTrackHandler}
+            <EditModal
+              isVisible={this.state.isModalVisible}
+              editTrackHandler={this.editTrackHandler}
+              id={id}
+              title={title}
+              artist={artist}
+              album={album}
+              genre={genre}
             />
           }
         </View>

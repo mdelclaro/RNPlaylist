@@ -1,11 +1,43 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import Modal from 'react-native-modal';
+import { connect } from 'react-redux';
+
+import { trackUpdated } from '../store/actions/index';
 
 import Input from './UI/Input';
 import ButtonWithBackground from './UI/ButtonWithBackground';
 
 class EditModal extends Component {
+  state = {
+    id: '',
+    title: '',
+    artist: '',
+    album: '',
+    genre: ''
+  }
+
+  componentDidMount() {
+    this.setState({
+      id: this.props.id,
+      title: this.props.title,
+      artist: this.props.artist,
+      album: this.props.album,
+      genre: this.props.genre
+    });
+  }
+
+  submitHandler = () => {
+    this.props.onTrackUpdate(
+      this.state.id,
+      this.state.title,
+      this.state.artist,
+      this.state.album,
+      this.state.genre
+    );
+    this.props.editTrackHandler();
+  }
+
   render() {
     return (
       <Modal
@@ -20,11 +52,26 @@ class EditModal extends Component {
         backdropTransitionInTiming={1000}
         backdropTransitionOutTiming={1000}
       >
-        <View>
-          <Input />
+        <View style={styles.modalContent}>
+          <Input
+            value={this.state.title}
+            onChangeText={(text) => this.setState({ title: text })}
+          />
+          <Input
+            value={this.state.artist}
+            onChangeText={(text) => this.setState({ artist: text })}
+          />
+          <Input
+            value={this.state.album}
+            onChangeText={(text) => this.setState({ album: text })}
+          />
+          <Input
+            value={this.state.genre}
+            onChangeText={(text) => this.setState({ genre: text })}
+          />
           <ButtonWithBackground
             color='#2f8c35'
-            onPress={this.props.editTrackHandler}
+            onPress={this.submitHandler}
           >
             Editar
           </ButtonWithBackground>
@@ -35,9 +82,28 @@ class EditModal extends Component {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center'
-  }
+  container: {
+    alignItems: 'center'
+  },
+  modalContent: {
+    height: Dimensions.get('window').height * 0.7,
+    width: Dimensions.get('window').width * 0.8,
+    //flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#cccccc',
+    borderRadius: 15,
+  },
 });
 
-export default EditModal;
+const mapDispatchToProps = dispatch => {
+  return {
+    onTrackUpdate: (newId, newTitle, newArtist, newAlbum, newGenre) =>
+      dispatch(trackUpdated(newId, newTitle, newArtist, newAlbum, newGenre))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(EditModal);

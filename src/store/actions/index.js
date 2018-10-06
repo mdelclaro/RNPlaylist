@@ -1,6 +1,6 @@
 export { 
   trackAdded,
-  trackChanged,
+  trackUpdated,
   trackDeleted,
 } from './TrackAction';
 

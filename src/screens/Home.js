@@ -9,7 +9,7 @@ import AddForm from '../components/AddForm';
 
 import {
   trackAdded,
-  trackChanged,
+  trackUpdated,
   trackDeleted,
   trackPositionChanged
 } from '../store/actions/index';
@@ -170,7 +170,7 @@ const mapDispatchToProps = dispatch => {
     onTrackAdd: (id, title, artist, album, genre) =>
       dispatch(trackAdded(id, title, artist, album, genre)),
     onTrackChange: (id, title, artist, album, genre) =>
-      dispatch(trackChanged(id, title, artist, album, genre)),
+      dispatch(trackUpdated(id, title, artist, album, genre)),
     onTrackDelete: id =>
       dispatch(trackDeleted(id)),
     onPositionChange: position =>

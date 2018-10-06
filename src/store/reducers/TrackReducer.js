@@ -1,6 +1,6 @@
 import {
   TRACK_ADDED,
-  TRACK_CHANGED,
+  TRACK_UPDATED,
   TRACK_DELETED
 } from '../actions/types';
 
@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         tracks: [...state.tracks, action.payload]
       };
-    case TRACK_CHANGED: {
+    case TRACK_UPDATED: {
       const { id, title, artist, album, genre } = action.payload;
       
       return {
