@@ -34,24 +34,12 @@ class AddForm extends Component {
 				validationSchema={Yup.object().shape({
 					title: Yup.string()
 						.required('Insira o nome da música'),
-					artist: this.props.option !== 'search'
-						? Yup.string()
-							.required('Insira o nome do artista')
-						: Yup.lazy(() => {
-							return Yup.mixed().notRequired();
-						}),
-					album: this.props.option !== 'search'
-						? Yup.string()
-							.required('Insira o nome do álbum')
-						: Yup.lazy(() => {
-							return Yup.mixed().notRequired();
-						}),
-					genre: this.props.option !== 'search'
-						? Yup.string()
-							.required('Insira o gênero')
-						: Yup.lazy(() => {
-							return Yup.mixed().notRequired();
-						}),
+					artist: Yup.string()
+						.required('Insira o nome do artista'),
+					album: Yup.string()
+						.required('Insira o nome do álbum'),
+					genre: Yup.string()
+						.required('Insira o gênero')
 				})}
 				render={({
 					values,
@@ -60,7 +48,7 @@ class AddForm extends Component {
 					errors,
 					touched,
 					setFieldTouched,
-					isValid
+					isValid,
 				}) => (
 						<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 							<KeyboardAvoidingView

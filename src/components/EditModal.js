@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTrackUpdate: (newId, newTitle, newArtist, newAlbum, newGenre) =>
-      dispatch(trackUpdated(newId, newTitle, newArtist, newAlbum, newGenre))
+    onTrackUpdate: (id, title, artist, album, genre) =>
+      dispatch(trackUpdated(id, title, artist, album, genre))
   };
 };
 

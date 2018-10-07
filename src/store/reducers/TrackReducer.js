@@ -38,7 +38,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         tracks: state.tracks.filter(track => {
-          return track.id !== action.payload.id;
+          return track.id !== action.payload;
         })
       };
     default:

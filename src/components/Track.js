@@ -3,12 +3,13 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Alert
   // LayoutAnimation
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { selectTrack } from '../store/actions';
+import { selectTrack, trackDeleted } from '../store/actions';
 
 import CardSection from './UI/CardSection';
 import TrackDetails from './TrackDetails';
@@ -19,8 +20,23 @@ class TrackDetail extends Component {
     isModalVisible: false
   }
 
-  onTrackSelected = () => {
-    this.props.onTrackSelected(this.props.track.id);
+  onTrackSelect = () => {
+    this.props.onTrackSelect(this.props.track.id);
+  }
+
+  onTrackLongPress = () => {
+    Alert.alert(
+      'Aviso',
+      `Deseja realmente deletar ${this.props.track.title}?`,
+      [
+        { text: 'Cancelar' },
+        {
+          text: 'Deletar', 
+          onPress: () =>
+            this.props.onTrackDelete(this.props.track.id)
+        }
+      ]
+    );
   }
 
   showEditModal = () => {
@@ -38,7 +54,10 @@ class TrackDetail extends Component {
   render() {
     const { id, title, artist, album, genre } = this.props.track;
     return (
-      <TouchableWithoutFeedback onPress={this.onTrackSelected}>
+      <TouchableWithoutFeedback
+        onPress={this.onTrackSelect}
+        onLongPress={this.onTrackLongPress}
+      >
         <View>
           <CardSection>
             <Text style={styles.titleStyle}>
@@ -88,8 +107,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTrackSelected: title =>
-      dispatch(selectTrack(title))
+    onTrackSelect: title =>
+      dispatch(selectTrack(title)),
+    onTrackDelete: id =>
+      dispatch(trackDeleted(id))
   };
 };
 

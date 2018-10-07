@@ -4,6 +4,7 @@ import { Navigation } from 'react-native-navigation';
 import { getImageSource } from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Formik } from 'formik';
 
 import AddForm from '../components/AddForm';
 
@@ -87,7 +88,7 @@ class Home extends Component {
     Keyboard.dismiss();
   }
 
-  submitHandler = (values, { resetForm }) => {
+  submitHandler = (values, { resetForm, setFieldTouched }) => {
     switch (this.props.option) {
       case 'add': {
         const id = uuidV1();
@@ -131,15 +132,17 @@ class Home extends Component {
       default:
         break;
     }
-    Keyboard.dismiss();
-    resetForm({});
-    // alert(JSON.stringify(this.props.tracks));
+    
+    resetForm({ title: '', artist: '', album: '', genre: '' });
+    setFieldTouched('genre', false, false);
+    //Keyboard.dismiss();
   }
 
   render() {
     return (
       <KeyboardAwareScrollView
         enableOnAndroid enableResetScrollToCoords={false}
+        keyboardShouldPersistTaps='handled'
         style={styles.container}
       >
         <View style={styles.container}>
