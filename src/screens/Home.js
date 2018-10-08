@@ -4,7 +4,6 @@ import { Navigation } from 'react-native-navigation';
 import { getImageSource } from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Formik } from 'formik';
 
 import AddForm from '../components/AddForm';
 

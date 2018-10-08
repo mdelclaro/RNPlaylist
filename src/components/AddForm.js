@@ -18,15 +18,6 @@ import MainText from './UI/MainText';
 
 class AddForm extends Component {
 	render() {
-		let headingText = null;
-
-		//if (true) {
-		headingText = (
-			<MainText>
-				<HeadingText>Home</HeadingText>
-			</MainText>
-		);
-		//}
 		return (
 			<Formik
 				initialValues={{ title: '', artist: '', album: '', genre: '' }}
@@ -55,10 +46,9 @@ class AddForm extends Component {
 								style={styles.container}
 								behavior='padding'
 							>
-								{headingText}
-
-								{/* Inputs Container */}
-
+								<MainText>
+									<HeadingText>Home</HeadingText>
+								</MainText>
 								<View style={styles.inputContainer}>
 									<InputValidation
 										placeholder='Título da Música'
@@ -67,6 +57,7 @@ class AddForm extends Component {
 										value={values.title}
 										onChange={setFieldValue}
 										onTouch={setFieldTouched}
+										onSubmitEditing={handleSubmit}
 										name='title'
 										error={touched.title && errors.title}
 										style={styles.input}
@@ -78,6 +69,7 @@ class AddForm extends Component {
 										value={values.artist}
 										onChange={setFieldValue}
 										onTouch={setFieldTouched}
+										onSubmitEditing={handleSubmit}
 										name='artist'
 										error={touched.artist && errors.artist}
 										style={styles.input}
@@ -89,6 +81,7 @@ class AddForm extends Component {
 										value={values.album}
 										onChange={setFieldValue}
 										onTouch={setFieldTouched}
+										onSubmitEditing={handleSubmit}
 										name='album'
 										error={touched.album && errors.album}
 										style={styles.input}
@@ -100,6 +93,8 @@ class AddForm extends Component {
 										value={values.genre}
 										onChange={setFieldValue}
 										onTouch={setFieldTouched}
+										onSubmitEditing={handleSubmit}
+										
 										name='genre'
 										error={touched.genre && errors.genre}
 										style={styles.input}
