@@ -89,53 +89,24 @@ class Home extends Component {
   }
 
   submitHandler = (values, { resetForm, setFieldTouched }) => {
-    switch (this.props.option) {
-      case 'add': {
-        const id = uuidV1();
-        this.props.onTrackAdd(
-          id,
-          values.title,
-          values.artist,
-          values.album,
-          values.genre
-        );
-        break;
-      }
-      case 'search': {
-        const searchedTrack = this.props.tracks.map(track => {
-          if (track.title === values.title) {
-            return track;
-          }
-          return null;
-        });
-        alert(JSON.stringify(searchedTrack));
-        break;
-      }
-      case 'change':
-        this.props.onTrackChange(
-          values.title,
-          values.artist,
-          values.album,
-          values.genre
-        );
-        break;
-      // case 'list':
-      //   Navigation.mergeOptions('bottomTabs', {
-      //     bottomTabs: {
-      //       currentTabIndex: 'Biblioteca'
-      //     }
-      //   });
-      //   break;
-      case 'delete':
-        this.props.onTrackDelete(values.title);
-        break;
-      default:
-        break;
-    }
-    
+    const id = uuidV1();
+    this.props.onTrackAdd(
+      id,
+      values.title,
+      values.artist,
+      values.album,
+      values.genre
+    );
+
+    Keyboard.dismiss();
     resetForm({ title: '', artist: '', album: '', genre: '' });
     setFieldTouched('genre', false, false);
-    //Keyboard.dismiss();
+
+    // Navigation.mergeOptions('bottomTabs', {
+    //   bottomTabs: {
+    //     currentTabIndex: 1
+    //   }
+    // });
   }
 
   render() {

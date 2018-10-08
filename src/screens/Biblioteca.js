@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 import Track from '../components/Track';
+import FAB from '../components/UI/FAB';
+import SearchModal from '../components/SearchModal';
 
 class Biblioteca extends Component {
   static get options() {
@@ -15,6 +17,28 @@ class Biblioteca extends Component {
         }
       }
     };
+  }
+
+  state = {
+    isModalVisible: false
+  }
+
+  showSearchModal = () => {
+    this.setState({
+      isModalVisible: true
+    });
+  }
+
+  searchTrackHandler = () => {
+    // const searchedTrack = this.props.tracks.map(track => {
+    //   if (track.title === values.title) {
+    //     return track;
+    //   }
+    //   return null;
+    // });
+    this.setState({
+      isModalVisible: false
+    });
   }
 
   renderItem(track) {
@@ -31,11 +55,28 @@ class Biblioteca extends Component {
           renderItem={this.renderItem}
           keyExtractor={(track) => track.id}
         />
+        <View style={styles.buttonContainer}>
+          <FAB style={styles.button} onPress={this.showSearchModal} isVisible={!this.state.isModalVisible} />
+        </View>
+        <SearchModal 
+          isVisible={this.state.isModalVisible}
+          searchTrackHandler={this.searchTrackHandler}
+        />
       </View>
     );
   }
-
 }
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    position: 'absolute',
+    right: 4,
+    bottom: 60,
+  },
+  button: {
+    color: '#2f8c35'
+  }
+});
 
 const mapStateToProps = state => {
   return {

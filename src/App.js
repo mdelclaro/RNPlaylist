@@ -25,75 +25,65 @@ const start = () => {
   ]).then(sources => {
     Navigation.setRoot({
       root: {
-        sideMenu: {
-          right: {
-            component: {
-              id: 'rightDrawer',
-              name: 'pdm.SideMenu',
-            },
+        bottomTabs: {
+          id: 'bottomTabs',
+          options: {
+            topbar: {
+              visible: true,
+              id: 'topBar',
+              title: {
+                text: 'Playlist'
+              }
+            }
           },
-          center: {
-            bottomTabs: {
-              id: 'bottomTabs',
-              options: {
-                topbar: {
-                  visible: true,
-                  id: 'topBar',
-                  title: {
-                    text: 'Playlist'
-                  }
-                }
-              },
-              children: [
-                {
-                  stack: {
-                    id: 'tab1',
-                    children: [
-                      {
-                        component: {
-                          id: 'Home',
-                          name: 'pdm.Home',
-                          options: {
-                            topbar: {
-                              visible: true
-                            },
-                            bottomTab: {
-                              text: 'Home',
-                              textColor: 'white',
-                              selectedTextColor: 'white',
-                              icon: sources[0],
-                            }
-                          }
+          children: [
+            {
+              stack: {
+                id: 'tab1',
+                children: [
+                  {
+                    component: {
+                      id: 'Home',
+                      name: 'pdm.Home',
+                      options: {
+                        topbar: {
+                          visible: true
                         },
-                      },
-                    ]
-                  }
-                },
-                {
-                  stack: {
-                    id: 'tab2',
-                    children: [
-                      {
-                        component: {
-                          id: 'Biblioteca',
-                          name: 'pdm.Biblioteca',
-                          options: {
-                            bottomTab: {
-                              text: 'Biblioteca',
-                              textColor: 'white',
-                              icon: sources[1],
-                              iconColor: 'white',
-                            }
-                          }
-                        },
-                      },
-                    ]
-                  }
-                },
-              ],
+                        bottomTab: {
+                          text: 'Home',
+                          textColor: 'white',
+                          selectedTextColor: 'white',
+                          icon: sources[0],
+                        }
+                      }
+                    },
+                  },
+                ]
+              }
             },
-          }
-        }
+            {
+              stack: {
+                id: 'tab2',
+                children: [
+                  {
+                    component: {
+                      id: 'Biblioteca',
+                      name: 'pdm.Biblioteca',
+                      options: {
+                        bottomTab: {
+                          text: 'Biblioteca',
+                          textColor: 'white',
+                          icon: sources[1],
+                          iconColor: 'white',
+                        }
+                      }
+                    },
+                  },
+                ]
+              }
+            },
+          ],
+        },
       }
     });
   });
