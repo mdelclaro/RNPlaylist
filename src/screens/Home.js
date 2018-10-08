@@ -47,10 +47,6 @@ class Home extends Component {
       });
   }
 
-  state = {
-    option: 'add'
-  }
-
   componentDidMount() {
     Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
     Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
@@ -74,20 +70,7 @@ class Home extends Component {
     });
   }
 
-  navigationButtonPressed({ buttonId }) {
-    if (buttonId === 'menuButton') {
-      Navigation.mergeOptions('Home', {
-        sideMenu: {
-          right: {
-            visible: true,
-          }
-        }
-      });
-    }
-    Keyboard.dismiss();
-  }
-
-  submitHandler = (values, { resetForm, setFieldTouched }) => {
+  submitHandler = (values, { resetForm, setFieldTouched, setSubmitting }) => {
     const id = uuidV1();
     this.props.onTrackAdd(
       id,
@@ -98,6 +81,7 @@ class Home extends Component {
     );
 
     Keyboard.dismiss();
+    setSubmitting(false);
     resetForm({ title: '', artist: '', album: '', genre: '' });
     setFieldTouched('genre', false, false);
 

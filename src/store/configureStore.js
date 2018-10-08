@@ -2,12 +2,10 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import TrackReducer from './reducers/TrackReducer';
-import ControlReducer from './reducers/ControlReducer';
 import SelectionReducer from './reducers/SelectionReducer';
 
 const rootReducer = combineReducers({
     tracks: TrackReducer,
-    options: ControlReducer,
     selectedTrack: SelectionReducer
 });
 
