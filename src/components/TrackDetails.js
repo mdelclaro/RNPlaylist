@@ -1,26 +1,25 @@
 import React from 'react';
-import { 
-  View, 
-  TouchableOpacity, 
+import {
+  View,
+  TouchableOpacity,
   Text,
-  Platform, 
-  StyleSheet } from 'react-native';
+  Platform,
+  StyleSheet
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-import CardSection from './UI/CardSection';
 
 const TrackDetails = props => {
   return (
-    <CardSection style={{ flexDirection: 'column', }}>
+    <View style={styles.container}>
       <View style={styles.detailsContainer}>
         <View>
-          <Text style={{ flex: 1 }}>
+          <Text style={styles.text}>
             {`Artista: ${props.artist}`}
           </Text>
-          <Text style={{ flex: 1 }}>
+          <Text style={styles.text}>
             {`Album: ${props.album}`}
           </Text>
-          <Text style={{ flex: 1 }}>
+          <Text style={styles.text}>
             {`Genero: ${props.genre}`}
           </Text>
         </View>
@@ -34,15 +33,28 @@ const TrackDetails = props => {
           </TouchableOpacity>
         </View>
       </View>
-    </CardSection>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    backgroundColor: '#303030',
+    justifyContent: 'flex-start',
+    borderColor: '#ddd',
+    position: 'relative',
+    marginBottom: 5,
+    padding: 4
+  },
   detailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  text: {
+    flex: 1,
+    color: 'white'
   }
 });
 

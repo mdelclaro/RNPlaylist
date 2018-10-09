@@ -16,6 +16,14 @@ const start = () => {
       selectedIconColor: '#2f8c35',
       textColor: '#2f8c35',
       selectedTextColor: '#2f8c35'
+    },
+    topBar: {
+      background: {
+        color: 'black',
+      },
+      title: {
+        color: 'white'
+      }
     }
   });
 

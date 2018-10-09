@@ -4,10 +4,12 @@ import {
   Text,
   StyleSheet,
   TouchableWithoutFeedback,
-  Alert
+  Alert,
+  Platform
   // LayoutAnimation
 } from 'react-native';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import { selectTrack, trackDeleted } from '../store/actions';
 
@@ -21,7 +23,13 @@ class TrackDetail extends Component {
   }
 
   onTrackSelect = () => {
-    this.props.onTrackSelect(this.props.track.id);
+    const { selectedTrack, track } = this.props;
+
+    if (track.id === selectedTrack) {
+      this.props.onTrackSelect(-1);
+    } else {
+      this.props.onTrackSelect(this.props.track.id);
+    }
   }
 
   onTrackLongPress = () => {
@@ -31,7 +39,7 @@ class TrackDetail extends Component {
       [
         { text: 'Cancelar' },
         {
-          text: 'Deletar', 
+          text: 'Deletar',
           onPress: () =>
             this.props.onTrackDelete(this.props.track.id)
         }
@@ -59,10 +67,17 @@ class TrackDetail extends Component {
         onLongPress={this.onTrackLongPress}
       >
         <View>
-          <CardSection>
+          <CardSection style={styles.titleContainer}>
             <Text style={styles.titleStyle}>
               {title}
             </Text>
+            <View sytle={styles.iconContainer}>
+              <Icon
+                name={Platform.OS === 'android' ? 'md-musical-note' : 'ios-musical-note'}
+                size={25}
+                color='white'
+              />
+            </View>
           </CardSection>
           {
             id === this.props.selectedTrack
@@ -93,9 +108,23 @@ class TrackDetail extends Component {
 }
 
 const styles = StyleSheet.create({
+  titleContainer: {
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5,
+    marginBottom: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  iconContainer: {
+    marginLeft: 4,
+    flex: 1,
+    justifyContent: 'flex-end'
+  },
   titleStyle: {
-    fontSize: 18,
-    paddingLeft: 2
+    flex: 1,
+    fontSize: 20,
+    paddingLeft: 2,
+    color: 'white'
   }
 });
 
@@ -107,8 +136,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTrackSelect: title =>
-      dispatch(selectTrack(title)),
+    onTrackSelect: id =>
+      dispatch(selectTrack(id)),
     onTrackDelete: id =>
       dispatch(trackDeleted(id))
   };

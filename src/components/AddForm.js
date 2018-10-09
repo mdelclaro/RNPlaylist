@@ -4,17 +4,15 @@ import {
 	StyleSheet,
 	KeyboardAvoidingView,
 	Keyboard,
-	TouchableWithoutFeedback
+	TouchableWithoutFeedback,
+	Text
 } from 'react-native';
-import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import ButtonWithBackground from './UI/ButtonWithBackground';
 import InputValidation from './UI/InputValidation';
-import HeadingText from './UI/HeadingText';
-import MainText from './UI/MainText';
 
 class AddForm extends Component {
 	render() {
@@ -46,9 +44,9 @@ class AddForm extends Component {
 								style={styles.container}
 								behavior='padding'
 							>
-								<MainText>
-									<HeadingText>Home</HeadingText>
-								</MainText>
+								<Text style={styles.title}>
+									Adicionar Música
+								</Text>
 								<View style={styles.inputContainer}>
 									<InputValidation
 										placeholder='Título da Música'
@@ -125,6 +123,12 @@ const styles = StyleSheet.create({
 		width: '100%',
 		flex: 1
 	},
+	title: {
+		color: 'white',
+		backgroundColor: 'transparent',
+		fontSize: 28,
+    fontWeight: 'bold'
+	},
 	input: {
 		backgroundColor: '#eee',
 		borderColor: '#bbb'
@@ -144,10 +148,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-const mapStateToProps = state => {
-	return {
-		option: state.options.option
-	};
-};
-
-export default connect(mapStateToProps)(AddForm);
+export default AddForm;

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, Platform, } from 'react-native';
 import { connect } from 'react-redux';
+import { getImageSource } from 'react-native-vector-icons/Ionicons';
+import { Navigation } from 'react-native-navigation';
 
 import Track from '../components/Track';
-import FAB from '../components/UI/FAB';
 import SearchModal from '../components/SearchModal';
 
 class Biblioteca extends Component {
@@ -19,14 +20,34 @@ class Biblioteca extends Component {
     };
   }
 
+  constructor(props) {
+    super(props);
+    Navigation.events().bindComponent(this);
+    getImageSource(Platform.OS === 'android' ? 'md-search' : 'ios-search', 30, '#2f8c35')
+      .then(icon => {
+        Navigation.mergeOptions('Biblioteca', {
+          topBar: {
+            rightButtons: [
+              {
+                id: 'searchButton',
+                icon
+              }
+            ]
+          },
+        });
+      });
+  }
+
   state = {
     isModalVisible: false
   }
 
-  showSearchModal = () => {
-    this.setState({
-      isModalVisible: true
-    });
+  navigationButtonPressed({ buttonId }) {
+    if (buttonId === 'searchButton') {
+      this.setState({
+        isModalVisible: true
+      });
+    }
   }
 
   searchTrackHandler = () => {
@@ -49,16 +70,15 @@ class Biblioteca extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, flexGrow: 1, backgroundColor: '#121212', }}>
         <FlatList
           data={this.props.tracks}
           renderItem={this.renderItem}
           keyExtractor={(track) => track.id}
+          contentContainerStyle={{ paddingBottom: 60 }}
+          style={{ padding: 10 }}
         />
-        <View style={styles.buttonContainer}>
-          <FAB style={styles.button} onPress={this.showSearchModal} isVisible={!this.state.isModalVisible} />
-        </View>
-        <SearchModal 
+        <SearchModal
           isVisible={this.state.isModalVisible}
           searchTrackHandler={this.searchTrackHandler}
         />
@@ -66,17 +86,6 @@ class Biblioteca extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    position: 'absolute',
-    right: 4,
-    bottom: 60,
-  },
-  button: {
-    color: '#2f8c35'
-  }
-});
 
 const mapStateToProps = state => {
   return {

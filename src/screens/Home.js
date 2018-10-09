@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, Platform, StyleSheet, Keyboard } from 'react-native';
+import { View, StyleSheet, Keyboard } from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import { getImageSource } from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -10,8 +9,7 @@ import AddForm from '../components/AddForm';
 import {
   trackAdded,
   trackUpdated,
-  trackDeleted,
-  trackPositionChanged
+  trackDeleted
 } from '../store/actions/index';
 
 const uuidV1 = require('uuid/v1');
@@ -27,24 +25,6 @@ class Home extends Component {
         }
       }
     };
-  }
-
-  constructor(props) {
-    super(props);
-    Navigation.events().bindComponent(this);
-    getImageSource(Platform.OS === 'android' ? 'md-more' : 'ios-more', 30, '#2f8c35')
-      .then(icon => {
-        Navigation.mergeOptions('Home', {
-          topBar: {
-            rightButtons: [
-              {
-                id: 'menuButton',
-                icon
-              }
-            ]
-          },
-        });
-      });
   }
 
   componentDidMount() {
@@ -81,9 +61,16 @@ class Home extends Component {
     );
 
     Keyboard.dismiss();
-    setSubmitting(false);
-    resetForm({ title: '', artist: '', album: '', genre: '' });
-    setFieldTouched('genre', false, false);
+    setTimeout(() => {
+      setSubmitting(false);
+      resetForm({ title: '', artist: '', album: '', genre: '' });
+      setFieldTouched('genre', false, false);
+    }, 100);
+
+    // Keyboard.dismiss();
+    // setSubmitting(false);
+    // resetForm({ title: '', artist: '', album: '', genre: '' });
+    // setFieldTouched('genre', false, false);
 
     // Navigation.mergeOptions('bottomTabs', {
     //   bottomTabs: {
@@ -112,13 +99,13 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#121212'
   }
 });
 
 const mapStateToProps = state => {
   return {
-    tracks: state.tracks.tracks,
-    option: state.options.option
+    tracks: state.tracks.tracks
   };
 };
 
@@ -129,9 +116,7 @@ const mapDispatchToProps = dispatch => {
     onTrackChange: (id, title, artist, album, genre) =>
       dispatch(trackUpdated(id, title, artist, album, genre)),
     onTrackDelete: id =>
-      dispatch(trackDeleted(id)),
-    onPositionChange: position =>
-      dispatch(trackPositionChanged(position))
+      dispatch(trackDeleted(id))
   };
 };
 
