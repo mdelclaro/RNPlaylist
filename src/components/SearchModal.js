@@ -7,8 +7,12 @@ import Input from './UI/Input';
 import ButtonWithBackground from './UI/ButtonWithBackground';
 
 class SearchModal extends Component {
-  submitHandler = () => {
-    this.props.searchTrackHandler();
+  state = {
+    searched: ''
+  };
+
+  searchHandler = () => {
+    this.props.searchTrackHandler(this.state.searched);
   }
 
   render() {
@@ -26,10 +30,13 @@ class SearchModal extends Component {
         backdropTransitionOutTiming={1000}
       >
         <View style={styles.modalContent}>
-          <Input placeholder='Título da música' />
+          <Input
+            placeholder='Pesquisar por título...'
+            onChangeText={(text) => this.setState({ searched: text })}
+          />
           <ButtonWithBackground
             color='#2f8c35'
-            onPress={this.submitHandler}
+            onPress={this.searchHandler}
           >
             Pesquisar
         </ButtonWithBackground>

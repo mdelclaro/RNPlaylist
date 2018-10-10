@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { trackUpdated } from '../store/actions/index';
 
@@ -40,43 +41,49 @@ class EditModal extends Component {
 
   render() {
     return (
-      <Modal
-        style={styles.container}
-        isVisible={this.props.isVisible}
-        backdropColor={'black'}
-        backdropOpacity={0.8}
-        animationIn='zoomInDown'
-        animationOut='zoomOutUp'
-        animationInTiming={1000}
-        animationOutTiming={1000}
-        backdropTransitionInTiming={1000}
-        backdropTransitionOutTiming={1000}
+      <KeyboardAwareScrollView
+        enableOnAndroid
+        enableResetScrollToCoords={false}
+        keyboardShouldPersistTaps='always'
       >
-        <View style={styles.modalContent}>
-          <Input
-            value={this.state.title}
-            onChangeText={(text) => this.setState({ title: text })}
-          />
-          <Input
-            value={this.state.artist}
-            onChangeText={(text) => this.setState({ artist: text })}
-          />
-          <Input
-            value={this.state.album}
-            onChangeText={(text) => this.setState({ album: text })}
-          />
-          <Input
-            value={this.state.genre}
-            onChangeText={(text) => this.setState({ genre: text })}
-          />
-          <ButtonWithBackground
-            color='#2f8c35'
-            onPress={this.submitHandler}
-          >
-            Editar
+        <Modal
+          style={styles.container}
+          isVisible={this.props.isVisible}
+          backdropColor={'black'}
+          backdropOpacity={0.8}
+          animationIn='zoomInDown'
+          animationOut='zoomOutUp'
+          animationInTiming={1000}
+          animationOutTiming={1000}
+          backdropTransitionInTiming={1000}
+          backdropTransitionOutTiming={1000}
+        >
+          <View style={styles.modalContent}>
+            <Input
+              value={this.state.title}
+              onChangeText={(text) => this.setState({ title: text })}
+            />
+            <Input
+              value={this.state.artist}
+              onChangeText={(text) => this.setState({ artist: text })}
+            />
+            <Input
+              value={this.state.album}
+              onChangeText={(text) => this.setState({ album: text })}
+            />
+            <Input
+              value={this.state.genre}
+              onChangeText={(text) => this.setState({ genre: text })}
+            />
+            <ButtonWithBackground
+              color='#2f8c35'
+              onPress={this.submitHandler}
+            >
+              Editar
           </ButtonWithBackground>
-        </View>
-      </Modal>
+          </View>
+        </Modal>
+      </KeyboardAwareScrollView>
     );
   }
 }
