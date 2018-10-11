@@ -5,8 +5,9 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Alert,
-  Platform
-  // LayoutAnimation
+  Platform,
+  LayoutAnimation,
+  UIManager
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -18,8 +19,19 @@ import TrackDetails from './TrackDetails';
 import EditModal from './EditModal';
 
 class TrackDetail extends Component {
+  constructor(props) {
+    super(props);
+    return Platform.OS === 'android' ?
+      UIManager.setLayoutAnimationEnabledExperimental
+        && UIManager.setLayoutAnimationEnabledExperimental(true)
+      : null;
+  }
   state = {
     isModalVisible: false
+  }
+
+  componentDidUpdate() {
+    LayoutAnimation.spring();
   }
 
   onTrackSelect = () => {
