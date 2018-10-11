@@ -57,6 +57,7 @@ class EditModal extends Component {
           animationOutTiming={1000}
           backdropTransitionInTiming={1000}
           backdropTransitionOutTiming={1000}
+          onBackdropPress={this.props.editTrackHandler}
         >
           <View style={styles.modalContent}>
             <Input
@@ -75,12 +76,20 @@ class EditModal extends Component {
               value={this.state.genre}
               onChangeText={(text) => this.setState({ genre: text })}
             />
-            <ButtonWithBackground
-              color='#2f8c35'
-              onPress={this.submitHandler}
-            >
-              Editar
-          </ButtonWithBackground>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <ButtonWithBackground
+                color='#2f8c35'
+                onPress={this.submitHandler}
+              >
+                Editar
+              </ButtonWithBackground>
+              <ButtonWithBackground
+                color='#e86345'
+                onPress={this.props.editTrackHandler}
+              >
+                Cancelar
+              </ButtonWithBackground>
+            </View>
           </View>
         </Modal>
       </KeyboardAwareScrollView>

@@ -15,6 +15,10 @@ class SearchModal extends Component {
     this.props.searchTrackHandler(this.state.searched);
   }
 
+  cancelSearchHandler = () => {
+    this.props.searchTrackHandler('');
+  }
+
   render() {
     return (
       <Modal
@@ -28,18 +32,27 @@ class SearchModal extends Component {
         animationOutTiming={1000}
         backdropTransitionInTiming={1000}
         backdropTransitionOutTiming={1000}
+        onBackdropPress={this.props.searchTrackHandler}
       >
         <View style={styles.modalContent}>
           <Input
             placeholder='Pesquisar por título...'
             onChangeText={(text) => this.setState({ searched: text })}
           />
-          <ButtonWithBackground
-            color='#2f8c35'
-            onPress={this.searchHandler}
-          >
-            Pesquisar
-        </ButtonWithBackground>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <ButtonWithBackground
+              color='#2f8c35'
+              onPress={this.searchHandler}
+            >
+              Pesquisar
+            </ButtonWithBackground>
+            <ButtonWithBackground
+              color='#e86345'
+              onPress={this.searchHandler}
+            >
+              Cancelar
+            </ButtonWithBackground>
+          </View>
         </View>
       </Modal>
     );

@@ -54,10 +54,15 @@ class Biblioteca extends Component {
   }
 
   searchTrackHandler = (text) => {
-    this.props.onTrackSearch(text);
+    if (text !== '') {
+      this.props.onTrackSearch(text);
+      this.setState({
+        isModalVisible: false,
+        searched: true
+      });
+    }
     this.setState({
       isModalVisible: false,
-      searched: true
     });
   }
 
