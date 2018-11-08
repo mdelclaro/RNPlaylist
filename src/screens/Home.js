@@ -66,17 +66,6 @@ class Home extends Component {
       resetForm({ title: '', artist: '', album: '', genre: '' });
       setFieldTouched('genre', false, false);
     }, 100);
-
-    // Keyboard.dismiss();
-    // setSubmitting(false);
-    // resetForm({ title: '', artist: '', album: '', genre: '' });
-    // setFieldTouched('genre', false, false);
-
-    // Navigation.mergeOptions('bottomTabs', {
-    //   bottomTabs: {
-    //     currentTabIndex: 1
-    //   }
-    // });
   }
 
   render() {

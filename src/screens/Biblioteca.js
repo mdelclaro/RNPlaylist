@@ -7,7 +7,7 @@ import { Navigation } from 'react-native-navigation';
 import Track from '../components/Track';
 import SearchModal from '../components/SearchModal';
 
-import { trackSearched } from '../store/actions/TrackAction';
+import { trackSearched, getTracks } from '../store/actions/TrackAction';
 
 class Biblioteca extends Component {
   static get options() {
@@ -39,6 +39,11 @@ class Biblioteca extends Component {
 
   componentDidUpdate() {
     this.renderIcon();
+    //this.props.onGetTracks();
+  }
+
+  componentDidAppear() {
+    this.props.onGetTracks();
   }
 
   navigationButtonPressed({ buttonId }) {
@@ -133,7 +138,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onTrackSearch: (text) =>
-      dispatch(trackSearched(text))
+      dispatch(trackSearched(text)),
+    onGetTracks: () =>
+      dispatch(getTracks())
   };
 };
 

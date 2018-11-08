@@ -2,7 +2,8 @@ export {
   trackAdded,
   trackUpdated,
   trackDeleted,
-  trackSearched
+  trackSearched,
+  getTracks
 } from './TrackAction';
 
 export { selectTrack } from './SelectTrackAction';

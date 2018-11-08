@@ -12,18 +12,18 @@ import {
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { selectTrack, trackDeleted } from '../store/actions';
+import { selectTrack, trackDeleted, getTracks } from '../store/actions';
 
 import CardSection from './UI/CardSection';
 import TrackDetails from './TrackDetails';
 import EditModal from './EditModal';
 
-class TrackDetail extends Component {
+class Track extends Component {
   constructor(props) {
     super(props);
     return Platform.OS === 'android' ?
       UIManager.setLayoutAnimationEnabledExperimental
-        && UIManager.setLayoutAnimationEnabledExperimental(true)
+      && UIManager.setLayoutAnimationEnabledExperimental(true)
       : null;
   }
   state = {
@@ -52,8 +52,10 @@ class TrackDetail extends Component {
         { text: 'Cancelar' },
         {
           text: 'Deletar',
-          onPress: () =>
-            this.props.onTrackDelete(this.props.track.id)
+          onPress: () => {
+            this.props.onTrackDelete(this.props.track.id);
+            this.props.onGetTracks();
+          }
         }
       ]
     );
@@ -149,8 +151,10 @@ const mapDispatchToProps = dispatch => {
     onTrackSelect: id =>
       dispatch(selectTrack(id)),
     onTrackDelete: id =>
-      dispatch(trackDeleted(id))
+      dispatch(trackDeleted(id)),
+    onGetTracks: () =>
+      dispatch(getTracks())
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrackDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(Track);
